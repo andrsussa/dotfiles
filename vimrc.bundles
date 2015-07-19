@@ -8,7 +8,6 @@ call vundle#begin()
 " Define bundles via Github repos
 Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-fugitive'
-" Bundle 'mustache/vim-mustache-handlebars'
 " Bundle 'blarghmatey/split-expander'
 " Bundle 'rking/ag.vim'
 " Bundle 'sjl/vitality.vim'
