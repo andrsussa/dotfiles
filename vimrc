@@ -30,7 +30,8 @@ endif
 
 filetype plugin indent on
 
-colorscheme 3dglasses
+" colorscheme 3dglasses
+colorscheme fruity
 set encoding=utf-8  " Necessary to show Unicode glyphs
 
 " Highlight line number of where cursor currently is
