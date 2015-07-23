@@ -113,7 +113,8 @@ end
 -- }}}
 
 awful.tag.setmwfact(0.65, tags[1][1])
-awful.tag.setncol(2, tags[1][1])
+awful.tag.setncol(1, tags[1][1])
+vain.layout.browse.extra_padding = 5;
 
 -- {{{ Wallpaper
 if beautiful.wallpaper then
