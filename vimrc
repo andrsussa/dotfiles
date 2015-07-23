@@ -123,9 +123,9 @@ nnoremap <Down> :echoe "Use j"<CR>
 "map <Leader>gp :Gpush<CR>
 
 " Toggle nerdtree with F10
-"map <F10> :NERDTreeToggle<CR>
+map <F10> :NERDTreeToggle<CR>
 " Current file in nerdtree
-"map <F9> :NERDTreeFind<CR>
+map <F9> :NERDTreeFind<CR>
 
 "key to insert mode with paste using F2 key
 map <F2> :set paste<CR>i
