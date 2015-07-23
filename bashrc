@@ -114,8 +114,8 @@ OPTIMUS_PREFIX="optirun"; export OPTIMUS_PREFIX
 JAVA_HOME="/usr/lib/jvm/jdk-8-oracle-x64/"; export JAVA_HOME
 
 # Android tools
-export PATH=${PATH}:~/Android/Sdk/tools
-export PATH=${PATH}:~/Android/Sdk/platform-tools
+export PATH=${PATH}:~/android-sdk-linux/tools
+export PATH=${PATH}:~/android-sdk-linux/platform-tools
 
 # Enable tab completion
 source ~/cfiles/git-completion.bash
