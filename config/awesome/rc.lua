@@ -75,6 +75,8 @@ gui_editor = "gvim"
 graphics   = "gimp"
 taskm	   = "lxtask"
 keepass	   = "keepass2"
+pdfviewer  = "evince"
+musicplayer= "spotify"
 
 -- lain
 lain.layout.termfair.nmaster   = 3
@@ -490,22 +492,22 @@ globalkeys = awful.util.table.join(
     awful.key({ altkey }, "Up",
         function ()
             awful.util.spawn("amixer -q set Master 1%+")
-            volumewidget.update()
+            --volumewidget.update()
         end),
     awful.key({ altkey }, "Down",
         function ()
             awful.util.spawn("amixer -q set Master 1%-")
-            volumewidget.update()
+            --volumewidget.update()
         end),
     awful.key({ altkey }, "m",
         function ()
             awful.util.spawn("amixer -q set Master playback toggle")
-            volumewidget.update()
+            --volumewidget.update()
         end),
     awful.key({ altkey, "Control" }, "m",
         function ()
             awful.util.spawn("amixer -q set Master playback 100%")
-            volumewidget.update()
+            --volumewidget.update()
         end),
 
     -- MPD control
@@ -539,6 +541,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "s", function () awful.util.spawn(gui_editor) end),
     awful.key({ modkey }, "g", function () awful.util.spawn(graphics) end),
     awful.key({ modkey }, "p", function () awful.util.spawn(taskm) end),
+    awful.key({ modkey }, "e", function () awful.util.spawn(pdfviewer) end),
+    awful.key({ modkey }, "y", function () awful.util.spawn(musicplayer) end),
 
     -- Prompt
     awful.key({ modkey }, "r", function () mypromptbox[mouse.screen]:run() end),
