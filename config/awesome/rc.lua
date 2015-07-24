@@ -77,6 +77,8 @@ taskm	   = "lxtask"
 keepass	   = "keepass2"
 pdfviewer  = "evince"
 musicplayer= "spotify"
+syscalc    = "speedcrunch"
+syslocker  = "slock"
 
 -- lain
 lain.layout.termfair.nmaster   = 3
@@ -544,6 +546,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "p", function () awful.util.spawn(taskm) end),
     awful.key({ modkey }, "e", function () awful.util.spawn(pdfviewer) end),
     awful.key({ modkey }, "y", function () awful.util.spawn(musicplayer) end),
+    awful.key({ }, "XF86Calculator", function () awful.util.spawn(syscalc) end),
+    awful.key({ }, "XF86TouchpadToggle", function () awful.util.spawn(syslocker) end),
 
     -- Prompt
     awful.key({ modkey }, "r", function () mypromptbox[mouse.screen]:run() end),
