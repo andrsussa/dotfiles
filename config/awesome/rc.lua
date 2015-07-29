@@ -52,6 +52,7 @@ end
 
 run_once("urxvtd")
 run_once("unclutter")
+run_once("kbdd")
 -- }}}
 
 -- {{{ Variable definitions
@@ -252,6 +253,29 @@ volmargin:set_bottom(6)
 volumewidget = wibox.widget.background(volmargin)
 volumewidget:set_bgimage(beautiful.widget_bg)
 
+-- Keyboard layout widget
+kbd_dbus_sw_cmd = "qdbus ru.gentoo.KbddService /ru/gentoo/KbddService  ru.gentoo.kbdd.set_layout "
+
+kbdmenu =awful.menu.new({ items = {{ "English-Alt", kbd_dbus_sw_cmd .. "0" },
+                                   { "English", kbd_dbus_sw_cmd .. "1" }}})
+
+kbdwidget = wibox.widget.textbox(" Alt ")
+kbdwidget.border_width = 1
+kbdwidget.border_color = beautiful.fg_normal
+kbdwidget:set_text(" Alt ")
+
+kbdstrings = {[0] = " Alt ", 
+              [1] = " Eng "}
+
+dbus.request_name("session", "ru.gentoo.kbdd")
+dbus.add_match("session", "interface='ru.gentoo.kbdd',member='layoutChanged'")
+dbus.connect_signal("ru.gentoo.kbdd", function(...)
+    local data = {...}
+    local layout = data[2]
+    kbdwidget:set_markup(kbdstrings[layout])
+    end
+)
+
 -- Weather
 yawn = lain.widgets.yawn(664474,
 {
@@ -375,6 +399,7 @@ for s = 1, screen.count() do
     right_layout:add(volumewidget)
     right_layout:add(yawn.icon)
     right_layout:add(yawn.widget)
+    right_layout:add(kbdwidget)
     right_layout:add(mytextclock)
 
     -- Now bring it all together (with the tasklist in the middle)
@@ -399,7 +424,7 @@ root.buttons(awful.util.table.join(
 globalkeys = awful.util.table.join(
     -- Take a screenshot
     -- https://github.com/copycat-killer/dots/blob/master/bin/screenshot
-    awful.key({ altkey }, "p", function() os.execute("screenshot") end),
+    awful.key({ }, "Print", function() os.execute("screenshot") end),
 
     -- Tag browsing
     awful.key({ modkey }, "Left",   awful.tag.viewprev       ),
@@ -494,12 +519,12 @@ globalkeys = awful.util.table.join(
     -- ALSA volume control
     awful.key({ altkey }, "Up",
         function ()
-            awful.util.spawn("amixer -q set Master 1%+")
+            awful.util.spawn("amixer -q set Master 3%+")
             --volumewidget.update()
         end),
     awful.key({ altkey }, "Down",
         function ()
-            awful.util.spawn("amixer -q set Master 1%-")
+            awful.util.spawn("amixer -q set Master 3%-")
             --volumewidget.update()
         end),
     awful.key({ altkey }, "m",
@@ -548,6 +573,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "y", function () awful.util.spawn(musicplayer) end),
     awful.key({ }, "XF86Calculator", function () awful.util.spawn(syscalc) end),
     awful.key({ }, "XF86TouchpadToggle", function () awful.util.spawn(syslocker) end),
+    awful.key({ altkey }, "p", function () os.execute(kbd_dbus_sw_cmd .. "0") end),
+    awful.key({ altkey, "Shift"   }, "p", function () os.execute(kbd_dbus_sw_cmd .. "1") end),
 
     -- Prompt
     awful.key({ modkey }, "r", function () mypromptbox[mouse.screen]:run() end),
