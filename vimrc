@@ -133,7 +133,7 @@ map <F2> :set paste<CR>i
 " Leave paste mode on exit
 au InsertLeave * set nopaste
 
-" Remove highligted by ESC
+" Remove highligted by SPACE
 nnoremap <space> :noh<return><esc>
 
 " Open new split panes to right and bottom, which feels more natural
