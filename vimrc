@@ -17,6 +17,7 @@ set ignorecase    " Ignore case in searching
 set smartcase     " Ignore previous command to include case
 set ttyfast
 set lazyredraw
+set guioptions -=m
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -60,7 +61,12 @@ augroup vimrcEx
 
   " Compile python with F5
   autocmd FileType python nnoremap <buffer> <F5> :exec '!python' shellescape(@%, 1)<cr>
+
+  " Compile C++ with F4
+  autocmd FileType cpp nnoremap <buffer> <F4> :make!<cr>
+  autocmd FileType cpp nnoremap <buffer> <F5> :!../bin/%<<cr>
 augroup END
+
 
 " Octave syntax 
 augroup filetypedetect 
@@ -149,12 +155,15 @@ map <C-l> <C-W>l
 " configure syntastic syntax checking to check on open as well as save
 "let g:syntastic_ruby_checkers = ['mri']
 "let g:syntastic_enable_highlighting=0
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 
 " Autocomplete with dictionary words when spell check is on
 set complete+=kspell
 
 " Always use vertical diffs
 set diffopt+=vertical
+
+let &path.="src/include,/usr/include/AL,"
 
 " Local config
 if filereadable($HOME . "/.vimrc.local")
