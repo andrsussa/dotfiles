@@ -53,6 +53,7 @@ end
 run_once("urxvtd")
 run_once("unclutter")
 run_once("kbdd")
+run_once("nm-applet")
 -- }}}
 
 -- {{{ Variable definitions
@@ -80,6 +81,7 @@ pdfviewer  = "evince"
 musicplayer= "spotify"
 syscalc    = "speedcrunch"
 syslocker  = "slock"
+filemng    = "nautilus"
 
 -- lain
 lain.layout.termfair.nmaster   = 3
@@ -277,7 +279,7 @@ dbus.connect_signal("ru.gentoo.kbdd", function(...)
 )
 
 -- Weather
-yawn = lain.widgets.yawn(664474,
+yawn = lain.widgets.yawn(35356,
 {
     settings = function()
         widget:set_markup(" " .. units .. " ")
@@ -519,12 +521,12 @@ globalkeys = awful.util.table.join(
     -- ALSA volume control
     awful.key({ altkey }, "Up",
         function ()
-            awful.util.spawn("amixer -q set Master 3%+")
+            awful.util.spawn("amixer -q set Master 10%+")
             --volumewidget.update()
         end),
     awful.key({ altkey }, "Down",
         function ()
-            awful.util.spawn("amixer -q set Master 3%-")
+            awful.util.spawn("amixer -q set Master 10%-")
             --volumewidget.update()
         end),
     awful.key({ altkey }, "m",
@@ -571,6 +573,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "p", function () awful.util.spawn(taskm) end),
     awful.key({ modkey }, "e", function () awful.util.spawn(pdfviewer) end),
     awful.key({ modkey }, "y", function () awful.util.spawn(musicplayer) end),
+    awful.key({ modkey }, "a", function () awful.util.spawn(filemng) end),
     awful.key({ }, "XF86Calculator", function () awful.util.spawn(syscalc) end),
     awful.key({ }, "XF86TouchpadToggle", function () awful.util.spawn(syslocker) end),
     awful.key({ altkey }, "p", function () os.execute(kbd_dbus_sw_cmd .. "0") end),
