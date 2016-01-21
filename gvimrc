@@ -2,6 +2,7 @@
 set vb
 
 " No toolbar
+set guioptions-=m
 set guioptions-=T
 
 " Use console dialogs

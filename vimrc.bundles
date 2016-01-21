@@ -9,16 +9,16 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-fugitive'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'rdnetto/YCM-Generator'
-Plugin 'LucHermitte/lh-vim-lib'
-Plugin 'LucHermitte/lh-tags'
-Plugin 'LucHermitte/lh-dev'
-Plugin 'LucHermitte/lh-brackets'
-Plugin 'LucHermitte/searchInRuntime'
-Plugin 'LucHermitte/mu-template'
-Plugin 'tomtom/stakeholders_vim'
-Plugin 'LucHermitte/lh-cpp'
+" Plugin 'Valloric/YouCompleteMe'
+" Plugin 'rdnetto/YCM-Generator'
+" Plugin 'LucHermitte/lh-vim-lib'
+" Plugin 'LucHermitte/lh-tags'
+" Plugin 'LucHermitte/lh-dev'
+" Plugin 'LucHermitte/lh-brackets'
+" Plugin 'LucHermitte/searchInRuntime'
+" Plugin 'LucHermitte/mu-template'
+" Plugin 'tomtom/stakeholders_vim'
+" Plugin 'LucHermitte/lh-cpp'
 Plugin 'vhdirk/vim-cmake'
 " Bundle 'blarghmatey/split-expander'
 " Bundle 'rking/ag.vim'
@@ -35,22 +35,23 @@ Plugin 'vhdirk/vim-cmake'
 " Bundle 'nelstrom/vim-textobj-rubyblock'
 " Bundle 'vim-scripts/tComment'
 Plugin 'scrooloose/nerdtree'
-" Bundle "MarcWeber/vim-addon-mw-utils"
-" Bundle "tomtom/tlib_vim"
-" Bundle "skwp/greplace.vim"
-" Bundle "vim-ruby/vim-ruby"
-" Bundle "elixir-lang/vim-elixir"
-" Bundle "scrooloose/syntastic"
-" Bundle "tpope/vim-haml"
+" Bundle 'MarcWeber/vim-addon-mw-utils'
+" Bundle 'tomtom/tlib_vim'
+" Bundle 'skwp/greplace.vim'
+" Bundle 'vim-ruby/vim-ruby'
+" Bundle 'elixir-lang/vim-elixir'
+" Bundle 'scrooloose/syntastic'
+" Bundle 'tpope/vim-haml'
 " Bundle 'Lokaltog/vim-easymotion'
-" Bundle "dkprice/vim-easygrep"
-" Bundle "altercation/vim-colors-solarized"
-" Bundle "myusuf3/numbers.vim"
+" Bundle 'dkprice/vim-easygrep'
+" Bundle 'altercation/vim-colors-solarized'
+" Bundle 'myusuf3/numbers.vim'
 " Bundle 'christoomey/vim-tmux-navigator'
 " Bundle 'jgdavey/tslime.vim'
 " Bundle 'henrik/vim-qargs'
 " Bundle 'kchmck/vim-coffee-script'
 " Bundle 'jsx/jsx.vim'
+Plugin 'vhda/verilog_systemverilog.vim'
 
 call vundle#end()            " required
 

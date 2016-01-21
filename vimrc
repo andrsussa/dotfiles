@@ -17,7 +17,6 @@ set ignorecase    " Ignore case in searching
 set smartcase     " Ignore previous command to include case
 set ttyfast
 set lazyredraw
-set guioptions -=m
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
