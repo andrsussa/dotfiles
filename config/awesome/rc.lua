@@ -51,9 +51,10 @@ function run_once(cmd)
 end
 
 run_once("urxvtd")
-run_once("unclutter")
 run_once("kbdd")
 run_once("nm-applet")
+run_once("rescuetime")
+run_once("hexchat")
 -- }}}
 
 -- {{{ Variable definitions
@@ -81,7 +82,8 @@ pdfviewer  = "evince"
 musicplayer= "spotify"
 syscalc    = "speedcrunch"
 syslocker  = "slock"
-filemng    = "nautilus"
+filemng    = "thunar"
+scroter    = "xfce4-screenshooter"
 
 -- lain
 lain.layout.termfair.nmaster   = 3
@@ -279,12 +281,12 @@ dbus.connect_signal("ru.gentoo.kbdd", function(...)
 )
 
 -- Weather
-yawn = lain.widgets.yawn(35356,
-{
-    settings = function()
-        widget:set_markup(" " .. units .. " ")
-    end
-})    
+-- yawn = lain.widgets.yawn(35356,
+-- {
+--     settings = function()
+--         widget:set_markup(" " .. units .. " ")
+--     end
+-- })    
 
 --Pomodoro
 pomodoro.init()
@@ -399,8 +401,8 @@ for s = 1, screen.count() do
     right_layout:add(netdowninfo)
     right_layout:add(netwidget)
     right_layout:add(volumewidget)
-    right_layout:add(yawn.icon)
-    right_layout:add(yawn.widget)
+--    right_layout:add(yawn.icon)
+--    right_layout:add(yawn.widget)
     right_layout:add(kbdwidget)
     right_layout:add(mytextclock)
 
@@ -495,8 +497,8 @@ globalkeys = awful.util.table.join(
                 client.focus:raise()
             end
         end),
-    awful.key({ altkey, "Shift"   }, "l",      function () awful.tag.incmwfact( 0.05)     end),
-    awful.key({ altkey, "Shift"   }, "h",      function () awful.tag.incmwfact(-0.05)     end),
+    awful.key({ altkey, "Control"   }, "l",      function () awful.tag.incmwfact( 0.05)     end),
+    awful.key({ altkey, "Control"   }, "h",      function () awful.tag.incmwfact(-0.05)     end),
     awful.key({ modkey, "Shift"   }, "l",      function () awful.tag.incnmaster(-1)       end),
     awful.key({ modkey, "Shift"   }, "h",      function () awful.tag.incnmaster( 1)       end),
     awful.key({ modkey, "Control" }, "l",      function () awful.tag.incncol(-1)          end),
@@ -574,10 +576,11 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "e", function () awful.util.spawn(pdfviewer) end),
     awful.key({ modkey }, "y", function () awful.util.spawn(musicplayer) end),
     awful.key({ modkey }, "a", function () awful.util.spawn(filemng) end),
+    awful.key({ modkey }, "d", function () awful.util.spawn(scroter) end),
     awful.key({ }, "XF86Calculator", function () awful.util.spawn(syscalc) end),
     awful.key({ }, "XF86TouchpadToggle", function () awful.util.spawn(syslocker) end),
-    awful.key({ altkey }, "p", function () os.execute(kbd_dbus_sw_cmd .. "0") end),
-    awful.key({ altkey, "Shift"   }, "p", function () os.execute(kbd_dbus_sw_cmd .. "1") end),
+--    awful.key({ altkey }, "p", function () os.execute(kbd_dbus_sw_cmd .. "0") end),
+--    awful.key({ altkey, "Shift"   }, "p", function () os.execute(kbd_dbus_sw_cmd .. "1") end),
 
     -- Prompt
     awful.key({ modkey }, "r", function () mypromptbox[mouse.screen]:run() end),
