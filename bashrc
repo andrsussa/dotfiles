@@ -111,7 +111,11 @@ fi
 
 OPTIMUS_PREFIX="optirun"; export OPTIMUS_PREFIX
 # MATLAB_JAVA="/usr/lib/jvm/jdk-8-oracle-x64/jre/"; export MATLAB_JAVA
-JAVA_HOME="/usr/lib/jvm/jdk-8-oracle-x64/"; export JAVA_HOME
+JAVA_HOME="/usr/lib/jvm/jdk1.8.0_77/"; export JAVA_HOME
+# export MATLABPATH=${MATLABPATH}:~/MATLAB/2016_01_16_BCT
+export MATLABPATH=${MATLABPATH}:~/MATLAB/HERMES\ Toolbox\ 2016-01-28
+export MATLABPATH=${MATLABPATH}:~/MATLAB/eeglab13_5_4b
+# MATLABPATH=$MATLABPATH:$HOME/bin/eeglab:.
 
 # Android tools
 export PATH=${PATH}:~/android-sdk-linux/tools
