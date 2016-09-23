@@ -3,6 +3,7 @@
 	autocrlf = input
 	safecrlf = true
 	excludesfile = ~/.gitignore
+	whitespace = warn
 [push]
 	default = upstream
 [merge]
@@ -18,7 +19,7 @@
 	co = checkout
 	br = branch
 	ci = commit
-	st = status
+	st = status -s
 	last = log -1 HEAD
 	lg = log --pretty=format:\"%Cred%h%Creset %ad %Cgreen|%Creset %s%C(yellow)%d%Creset %C(bold blue)<%an>%Creset\" --date=short
 	type = cat-file -t
