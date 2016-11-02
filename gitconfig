@@ -11,7 +11,7 @@
 	tool = vimdiff
 [user]
 	name = Andrés Ussa Caycedo
-	email = andresussa@gmail.com
+	email = andrsussa@gmail.com
 [credential]
 	helper = cache --timeout=3600
 [alias]
