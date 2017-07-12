@@ -111,15 +111,18 @@ fi
 
 OPTIMUS_PREFIX="optirun"; export OPTIMUS_PREFIX
 # MATLAB_JAVA="/usr/lib/jvm/jdk-8-oracle-x64/jre/"; export MATLAB_JAVA
-JAVA_HOME="/usr/lib/jvm/jdk1.8.0_77/"; export JAVA_HOME
+JAVA_HOME="/usr/lib/jvm/java-1.8.0-openjdk-amd64"; export JAVA_HOME
 # export MATLABPATH=${MATLABPATH}:~/MATLAB/2016_01_16_BCT
 export MATLABPATH=${MATLABPATH}:~/MATLAB/HERMES\ Toolbox\ 2016-01-28
 export MATLABPATH=${MATLABPATH}:~/MATLAB/eeglab13_5_4b
 # MATLABPATH=$MATLABPATH:$HOME/bin/eeglab:.
 
 # Android tools
-export PATH=${PATH}:~/android-sdk-linux/tools
-export PATH=${PATH}:~/android-sdk-linux/platform-tools
+# export PATH=${PATH}:~/android-sdk-linux/tools
+# export PATH=${PATH}:~/android-sdk-linux/platform-tools
+
+# Anaconda
+export PATH=/home/andres/anaconda2/bin:$PATH
 
 # Enable tab completion
 source ~/cfiles/git-completion.bash
@@ -137,3 +140,6 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 # '\$(__git_ps1)' adds git-related stuff
 # '\W' adds the name of the current directory
 export PS1="$purple\u$green\$(__git_ps1)$blue \W $ $reset"
+# source ~/ros_catkin_ws/install_isolated/setup.bash
+# source ~/catkin_ws/devel/setup.bash
+# export GAZEBO_RESOURCE_PATH=/usr/share/gazebo-7:/usr/share/gazebo_models:${GAZEBO_RESOURCE_PATH}
