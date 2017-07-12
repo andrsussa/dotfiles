@@ -51,6 +51,10 @@ augroup vimrcEx
     \   exe "normal g`\"" |
     \ endif
 
+  autocmd BufReadPost fugitive://* set bufhidden=delete
+
+
+
   " Set syntax highlighting for specific file types
   autocmd BufRead,BufNewFile *.prog set filetype=asm
 
@@ -63,7 +67,7 @@ augroup vimrcEx
 
   " Compile C++ with F4
   autocmd FileType cpp nnoremap <buffer> <F4> :make!<cr>
-  autocmd FileType cpp nnoremap <buffer> <F5> :!../bin/%<<cr>
+  autocmd FileType cpp nnoremap <buffer> <F5> :!./%<<cr>
 augroup END
 
 
@@ -161,6 +165,9 @@ set complete+=kspell
 
 " Always use vertical diffs
 set diffopt+=vertical
+
+" Show your current git branch
+set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
 let &path.="src/include,/usr/include/AL,"
 
