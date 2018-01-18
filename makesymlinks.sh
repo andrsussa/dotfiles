@@ -8,9 +8,10 @@
 
 dir=~/repos/dotfiles                    # dotfiles directory
 olddir=~/repos/dotfiles_old             # old dotfiles backup directory
-files="bash_aliases bashrc fonts.conf gitconfig gitignore gitmessage gvimrc
-vimrc vimrc.bundles xinitrc Xmodmap xsessionrc config/awesome/rc.lua colors
-fonts"    # list of files/folders to symlink in homedir
+files="bash_aliases bashrc gitconfig gitignore gitmessage gvimrc vimrc vimrc.bundles Xmodmap xsessionrc" # ignored for now:  config/awesome/rc.lua fonts.conf xinitrc fonts colors
+# list of files/folders to symlink in homedir
+
+
 
 ##########
 

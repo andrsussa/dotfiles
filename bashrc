@@ -79,7 +79,7 @@ if [ -x /usr/bin/dircolors ]; then
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
-    #alias grep='grep --color=auto'
+    alias grep='grep --color=auto'
     #alias fgrep='fgrep --color=auto'
     #alias egrep='egrep --color=auto'
 fi
@@ -111,10 +111,10 @@ fi
 
 OPTIMUS_PREFIX="optirun"; export OPTIMUS_PREFIX
 # MATLAB_JAVA="/usr/lib/jvm/jdk-8-oracle-x64/jre/"; export MATLAB_JAVA
-JAVA_HOME="/usr/lib/jvm/java-1.8.0-openjdk-amd64"; export JAVA_HOME
+# JAVA_HOME="/usr/lib/jvm/java-1.8.0-openjdk-amd64"; export JAVA_HOME
 # export MATLABPATH=${MATLABPATH}:~/MATLAB/2016_01_16_BCT
-export MATLABPATH=${MATLABPATH}:~/MATLAB/HERMES\ Toolbox\ 2016-01-28
-export MATLABPATH=${MATLABPATH}:~/MATLAB/eeglab13_5_4b
+# export MATLABPATH=${MATLABPATH}:~/MATLAB/HERMES\ Toolbox\ 2016-01-28
+# export MATLABPATH=${MATLABPATH}:~/MATLAB/eeglab13_5_4b
 # MATLABPATH=$MATLABPATH:$HOME/bin/eeglab:.
 
 # Android tools
@@ -122,7 +122,7 @@ export MATLABPATH=${MATLABPATH}:~/MATLAB/eeglab13_5_4b
 # export PATH=${PATH}:~/android-sdk-linux/platform-tools
 
 # Anaconda
-export PATH=/home/andres/anaconda2/bin:$PATH
+# export PATH=/home/andres/anaconda2/bin:$PATH
 
 # Enable tab completion
 source ~/cfiles/git-completion.bash
