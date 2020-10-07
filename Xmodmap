@@ -9,3 +9,5 @@
 
 clear Lock
 keycode 66 = Escape NoSymbol Escape
+keycode 107 = Shift_R NoSymbol Shift_R
+add shift = Shift_R
