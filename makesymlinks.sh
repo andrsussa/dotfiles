@@ -8,7 +8,7 @@
 
 dir=~/repos/dotfiles                    # dotfiles directory
 olddir=~/repos/dotfiles_old             # old dotfiles backup directory
-files="bash_aliases bashrc gitconfig gitignore gitmessage gvimrc vimrc vimrc.bundles Xmodmap xsessionrc" # ignored for now:  config/awesome/rc.lua fonts.conf xinitrc fonts colors
+files="bash_aliases bashrc gitconfig gitignore gitmessage gvimrc vimrc vimrc.bundles Xmodmap xsessionrc" # ignored for now: fonts.conf xinitrc fonts colors
 # list of files/folders to symlink in homedir
 
 
@@ -32,3 +32,10 @@ for file in $files; do
     echo "Creating symlink to $file in home directory."
     ln -s $dir/$file ~/.$file
 done
+
+# special case for rc.lua
+echo "Moving rc.lua from ~/config/awesome to $olddir"
+mv ~/.config/awesome/rc.lua $olddir
+echo "Creating symlink to rc.lua in config/awesome directory."
+ln -s $dir/rc.lua ~/.config/awesome/rc.lua
+
