@@ -4,4 +4,4 @@ xset s noblank     # don't blank the video device
 xset +fp ~/.fonts
 xset fp rehash
 xmodmap /home/andres/.Xmodmap
-xflux -l 4.6 -g -74.07
+xflux -l 1.3 -g 103.7
