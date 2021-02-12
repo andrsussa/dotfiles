@@ -1,41 +1,184 @@
-" Leader
-let mapleader = " "
+set encoding=utf-8
 
-set backspace=2   " Backspace deletes like most programs in insert mode
-set nocompatible
-set nobackup
-set nowritebackup
-set noswapfile    " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
-set history=500
-set ruler         " show the cursor position all the time
-set showcmd       " display incomplete commands
-set incsearch     " do incremental searching
-set laststatus=2  " Always display the status line
-set autowrite     " Automatically :write before running commands
-set hlsearch!     " Highlight searching
-set ignorecase    " Ignore case in searching
-set smartcase     " Ignore previous command to include case
-set ttyfast
-set lazyredraw
+scriptencoding utf-8
 
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
+""" General
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'wakatime/vim-wakatime'
+Plugin 'preservim/nerdcommenter'
+Plugin 'tpope/vim-fugitive'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'itchyny/lightline.vim'
+Plugin 'joshdick/onedark.vim'
+Plugin 'liuchengxu/vista.vim'
+Plugin 'Valloric/YouCompleteMe'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+" Work around CVE-2019-12735.
+set nomodeline
+set noshowmode
+
+""" Whitespace, indentation, etc.
+set sw=4 et "shiftwidth expandtab
+set softtabstop=-1
+set ts=8 "tabstop
+set nosmartindent
+set cin noai "cindent noautoindent
+set tw=60 cc=60 "textwidth colorcolumn
+set nojoinspaces
+set formatoptions=cloqr
+
+""" Text manipulation
+set bs=indent,eol,start
+set completeopt=menu,preview
+let mapleader=";"
+
+" Don't synchronize Vim's unnamed register with system clipboard.
+set clipboard=
+
+""" Text alignment
+""" http://vim.wikia.com/wiki/Regex-based_text_alignment
+command! -nargs=? -range Align <line1>,<line2>call AlignSection('<args>')
+function! AlignSection(regex) range
+  let extra = 1
+  let sep = empty(a:regex) ? '=' : a:regex
+  let maxpos = 0
+  let section = getline(a:firstline, a:lastline)
+  for line in section
+    let pos = match(line, ' *'.sep)
+    if maxpos < pos
+      let maxpos = pos
+    endif
+  endfor
+  call map(section, 'AlignLine(v:val, sep, maxpos, extra)')
+  call setline(a:firstline, section)
+endfunction
+
+function! AlignLine(line, sep, maxpos, extra)
+  let m = matchlist(a:line, '\(.\{-}\) \{-}\('.a:sep.'.*\)')
+  if empty(m)
+    return a:line
+  endif
+  let spaces = repeat(' ', a:maxpos - strlen(m[1]) + a:extra)
+  return m[1] . spaces . m[2]
+endfunction
+
+" Make Y consistent with D (i.e. D : d$ :: Y : y$)
+nmap <unique> Y y$
+
+""" Navigation
+set nofoldenable
+set foldmethod=marker
+if v:version >= 703
+    set relativenumber
+endif
+set number
+set numberwidth=3
+set nostartofline
+
+autocmd CmdwinEnter * setlocal norelativenumber
+autocmd CompleteDone * pclose
+
+" Sane searching
+set hlsearch
+set incsearch
+set visualbell
+set smartcase ignorecase
+nnoremap <space> :noh<return><esc>
+
+" Save searches
+set viminfo+=/200
+
+" Use tab for %
+nnoremap <unique> <tab> %
+vnoremap <unique> <tab> %
+
+" Quicker window movement
+nnoremap <C-j> <C-W>j
+nnoremap <C-k> <C-W>k
+nnoremap <C-h> <C-W>h
+nnoremap <C-l> <C-W>l
+nnoremap <unique> ts :split<SPACE>
+nnoremap <unique> tv :vsplit<SPACE>
+nnoremap <unique> tc <C-W>c
+set splitbelow splitright
+
+" search and replace under cursor
+nnoremap <Leader>r :%s/\<<C-r><C-w>\>/
+
+""" File management
+set autowrite
+
+" Don't hide any files from completion.
+set wildignore=
+
+""" Display
+set nowrap
+set ruler
+set laststatus=2
+set list
+set listchars=
+set listchars+=precedes:<,extends:>
+set listchars+=tab:⇥\ 
+set sidescroll=5
+set scrolloff=5
+set shortmess=a     " Abbreviate status line
+set shortmess+=tToO " Other crap
+
+let loaded_matchparen = v:true
+
+" Terminal window title
+set title
+set titlestring=%t
+set titleold=
+
+""" Spelling
+set spellcapcheck=
+
+""" Command line
+set wildmenu
+set wildmode=longest,full
+
+" Save history
+set history=10000
+set viminfo+=:10000
+
+""" Terminal
+" Treat undercurl as underline.
+set t_Cs= t_Ce=
+
+" Handle <ESC> immediately in insert mode. Wait indefinitely for incomplete
+" mappings.
+set esckeys
+set notimeout ttimeout ttimeoutlen=0
+set showcmd
+
+""" Syntax hilighting
 if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
   syntax on
 endif
+filetype on
+filetype indent on
+filetype plugin on
 
-if filereadable(expand("~/.vimrc.bundles"))
-  source ~/.vimrc.bundles
-endif
-
-filetype plugin indent on
-
-" colorscheme 3dglasses
 colorscheme fruity
-set encoding=utf-8  " Necessary to show Unicode glyphs
 
-" Highlight line number of where cursor currently is
-" hi CursorLineNr guifg=#050505
+let c_space_errors=1
+let c_no_comment_fold=1
+let c_no_if0_fold=1
+
+set concealcursor=nv
 
 augroup vimrcEx
   autocmd!
@@ -51,13 +194,6 @@ augroup vimrcEx
     \   exe "normal g`\"" |
     \ endif
 
-  autocmd BufReadPost fugitive://* set bufhidden=delete
-
-
-
-  " Set syntax highlighting for specific file types
-  autocmd BufRead,BufNewFile *.prog set filetype=asm
-
   " Automatically wrap at 72 characters and spell check git commit messages
   autocmd FileType gitcommit setlocal textwidth=72
   autocmd FileType gitcommit setlocal spell
@@ -68,31 +204,11 @@ augroup vimrcEx
   " Compile C++ with F4
   autocmd FileType cpp nnoremap <buffer> <F4> :make!<cr>
   autocmd FileType cpp nnoremap <buffer> <F5> :!./%<<cr>
+  autocmd FileType cpp nnoremap <buffer>K :JbzCppMan<CR>
 augroup END
-
-
-" Octave syntax 
-augroup filetypedetect 
-  au! BufRead,BufNewFile *.m,*.oct set filetype=octave 
-augroup END 
-
-" Tabs configuration
-set tabstop=8
-set softtabstop=4
-set shiftwidth=4
-set expandtab
 
 " Display extra whitespace
 set list listchars=tab:»·,trail:·,nbsp:·
-
-" Make it obvious where 80 characters is
-set textwidth=80
-set colorcolumn=+1
-
-" Numbers
-set number
-set numberwidth=5
-set relativenumber
 
 " Persistent undo
 set undodir=~/.vim/undo/
@@ -100,78 +216,52 @@ set undofile
 set undolevels=1000
 set undoreload=10000
 
-" Fuzzy finder: ignore stuff that can't be opened, and generated files
-let g:fuzzy_ignore = "*.png;*.PNG;*.JPG;*.jpg;*.GIF;*.gif;vendor/**;coverage/**;tmp/**;rdoc/**"
-
-" Tab completion
-" will insert tab at beginning of line,
-" will use completion if not at beginning
-set wildmode=list:longest,list:full
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
-inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <S-Tab> <c-n>
-
 " Get off my lawn
 nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
 
-" Leader Mappings
-"map <Space> <leader>
-"map <Leader>w :update<CR>
-"map <Leader>q :qall<CR>
-"map <Leader>gs :Gstatus<CR>
-"map <Leader>gc :Gcommit<CR>
-"map <Leader>gp :Gpush<CR>
-
-" Toggle nerdtree with F10
-map <F10> :NERDTreeToggle<CR>
-" Current file in nerdtree
-map <F9> :NERDTreeFind<CR>
-
-"key to insert mode with paste using F2 key
-map <F2> :set paste<CR>i
-" Leave paste mode on exit
-au InsertLeave * set nopaste
-
-" Remove highligted by SPACE
-nnoremap <space> :noh<return><esc>
-
-" Open new split panes to right and bottom, which feels more natural
-set splitbelow
-set splitright
-
-" Quicker window movement
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
-
-" configure syntastic syntax checking to check on open as well as save
-"let g:syntastic_ruby_checkers = ['mri']
-"let g:syntastic_enable_highlighting=0
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+let g:ycm_confirm_extra_conf = 1
+nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>ge :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
-" Autocomplete with dictionary words when spell check is on
-set complete+=kspell
+" NERDCommenter options
+let g:NERDCustomDelimiters = { 'less': { 'left': '// ', 'right': '', 'leftAlt': '/* ', 'rightAlt': ' */' }, 'javascript': { 'left': '// ', 'right': '', 'leftAlt': '/* ', 'rightAlt': ' */' } }
 
-" Always use vertical diffs
-set diffopt+=vertical
+function! s:JbzCppMan()
+    let old_isk = &iskeyword
+    setl iskeyword+=:
+    let str = expand("<cword>")
+    let &l:iskeyword = old_isk
+    execute 'Man ' . str
+endfunction
+command! JbzCppMan :call s:JbzCppMan()
+runtime ftplugin/man.vim
 
-" Show your current git branch
-set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+function! NearestMethodOrFunction() abort
+  return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
 
-let &path.="src/include,/usr/include/AL,"
+autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 
-" Local config
-if filereadable($HOME . "/.vimrc.local")
-  source ~/.vimrc.local
-endif
+" lightline config
+let g:lightline = {
+      \ 'colorscheme': 'onedark',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'readonly', 'filename', 'modified', 'gitbranch', 'method' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead',
+      \   'method': 'NearestMethodOrFunction'
+      \ },
+      \ }
+
+" Support fish shell
+set shell=/bin/bash
+
+" Must be last.  Forgot why.
+set exrc secure
