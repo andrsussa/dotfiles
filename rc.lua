@@ -17,7 +17,6 @@ require("awful.hotkeys_popup.keys")
 
 -- Load Debian menu entries
 local debian = require("debian.menu")
--- local has_fdo, freedesktop = pcall(require, "freedesktop")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -46,7 +45,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("/home/andres/.config/awesome/theme.lua")
+beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
@@ -73,7 +72,6 @@ awful.layout.layouts = {
     awful.layout.suit.max,
     awful.layout.suit.max.fullscreen,
     awful.layout.suit.magnifier,
-    lain.layout.centerwork,
     awful.layout.suit.corner.nw,
     awful.layout.suit.floating,
     -- awful.layout.suit.corner.ne,
@@ -107,11 +105,17 @@ myawesomemenu = {
    { "quit", function() awesome.quit() end}
 }
 
-mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "Debian", debian.menu.Debian_menu.Debian },
-                                    { "open terminal", terminal }
-                                  }
-                        })
+local menu_awesome = { "awesome", myawesomemenu, beautiful.awesome_icon }
+local menu_terminal = { "open terminal", terminal }
+
+mymainmenu = awful.menu({
+    items = {
+              menu_awesome,
+              { "Debian", debian.menu.Debian_menu.Debian },
+              menu_terminal,
+            }
+})
+
 
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
@@ -549,7 +553,7 @@ awful.rules.rules = {
 			width = 480,
 			height = 270,
 			x = 1440,
-			y = 810
+			y = 810 -- 510
 	},
         
     },
