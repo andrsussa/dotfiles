@@ -21,6 +21,7 @@ Plugin 'itchyny/lightline.vim'
 Plugin 'joshdick/onedark.vim'
 Plugin 'liuchengxu/vista.vim'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'derekwyatt/vim-fswitch'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -114,6 +115,13 @@ nnoremap <unique> tv :vsplit<SPACE>
 nnoremap <unique> tc <C-W>c
 set splitbelow splitright
 
+" fswitch mappings
+nnoremap <silent> <A-o> :FSHere<cr>
+nnoremap <silent> <Leader>oh :FSSplitLeft<cr>
+nnoremap <silent> <Leader>oj :FSSplitBelow<cr>
+nnoremap <silent> <Leader>ok :FSSplitAbove<cr>
+nnoremap <silent> <Leader>ol :FSSplitRight<cr>
+
 " search and replace under cursor
 nnoremap <Leader>r :%s/\<<C-r><C-w>\>/
 
@@ -204,7 +212,13 @@ augroup vimrcEx
   " Compile C++ with F4
   autocmd FileType cpp nnoremap <buffer> <F4> :make!<cr>
   autocmd FileType cpp nnoremap <buffer> <F5> :!./%<<cr>
+
+  " Access Standard Library documentation using cppman
   autocmd FileType cpp nnoremap <buffer>K :JbzCppMan<CR>
+
+  " Switch between source and header file
+  au BufEnter *.h  let b:fswitchdst = "c,cpp,cc,m"
+  au BufEnter *.cc let b:fswitchdst = "h,hpp"
 augroup END
 
 " Display extra whitespace
