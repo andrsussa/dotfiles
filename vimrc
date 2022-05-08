@@ -102,8 +102,8 @@ nnoremap <space> :noh<return><esc>
 set viminfo+=/200
 
 " Use tab for %
-nnoremap <unique> <tab> %
-vnoremap <unique> <tab> %
+"nnoremap <unique> <tab> %
+"vnoremap <unique> <tab> %
 
 " Quicker window movement
 nnoremap <C-j> <C-W>j
@@ -256,7 +256,7 @@ command! JbzCppMan :call s:JbzCppMan()
 runtime ftplugin/man.vim
 
 function! NearestMethodOrFunction() abort
-  return get(b:, 'vista_nearest_method_or_function', '')
+    return get(b:, 'vista_nearest_method_or_function', '')
 endfunction
 
 autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
